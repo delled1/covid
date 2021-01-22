@@ -1,24 +1,42 @@
 import logo from './logo.svg';
 import './App.css';
+import CovidCard from "./components/CovidCard"
+import { Route, Switch } from "react-router-dom"
+import Home from "./components/Home"
+import axios from "axios"
+import { useEffect, useState } from 'react';
 
 function App() {
+
+  const [covidInfo, setCovidInfo] = useState([]);
+
+  useEffect(() => {
+    const getCovidInfo = () => {
+      axios
+        .get('https://cors-anywhere.herokuapp.com/https://covid-api.mmediagroup.fr/v1/cases?country=US')
+        .then(response => {
+          // console.log(response)
+          // console.log(response.data)
+          setCovidInfo(response.data)
+
+        })
+        .catch(error => {
+          console.error('Server Error', error)
+        })
+    }
+    getCovidInfo();
+  }, []);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+
+    <Switch>
+      <Route exact path="/" component={Home} />
+      <Route exact path="/covid" component={CovidCard}>
+        <CovidCard covid={covidInfo} />
+      </Route>
+
+
+    </Switch>
+
   );
 }
 
