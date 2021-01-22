@@ -1,7 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 import CovidCard from "./components/CovidCard"
-import { Route, Switch } from "react-router-dom"
+import { Route, Switch, Link } from "react-router-dom"
 import Home from "./components/Home"
 import axios from "axios"
 import { useEffect, useState } from 'react';
@@ -29,8 +29,10 @@ function App() {
   return (
 
     <Switch>
-      <Route exact path="/" component={Home} />
-      <Route exact path="/covid" component={CovidCard}>
+      {/* <Route exact path="/" component={Home} /> */}
+      
+      <Route exact path="/" component={CovidCard}>
+        
         <CovidCard covid={covidInfo} />
       </Route>
 

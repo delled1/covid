@@ -23,6 +23,7 @@ export default function CovidCard(props) {
     return (
 
         <div>
+            <h2>COVID</h2>
             <CovidState state={props.covid} />
 
             {/* Confirmed: {covidKeysValues[1].confirmed}
